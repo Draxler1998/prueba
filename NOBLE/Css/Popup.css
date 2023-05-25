@@ -1,0 +1,87 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;	
+	
+}
+
+body{
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+	background-image: url("../../Imagenes/Panel/fondo.jpg");
+	backdrop-filter:blur(10px);
+	text-align: center;
+}
+
+div h2{
+  	color: #fff;
+	padding-top: 10vw;
+	padding-bottom: 10vw;
+	text-align: center;
+	margin-right: 5vw;
+}
+
+input{
+    width: 90%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: rgba(0,0,0,.5);
+    font-size: 16px;
+    outline: none;
+	border-radius: 10px;
+}
+
+select {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: rgba(0,0,0,.2);
+    font-size: 16px;
+    outline: none;
+	border-radius: 10px;
+}
+
+button{
+	align-items: center;
+    padding: 10px 40px;
+    margin-top: 10vw;
+	margin-bottom: 10vw;
+    border: none;
+    font-size: 14px;
+    background:  #1F1F1F;;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    outline: none;
+	border-radius: 10px;
+}
+
+button:hover{
+	background: #C8641F;
+}
+
+
+input, select, textarea{
+    color: #fff;
+}
+
+textarea:focus, input:focus {
+    color: #fff;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+select, 
+option {
+	background-color: #323232;
+}

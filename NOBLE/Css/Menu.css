@@ -1,0 +1,105 @@
+.menu{
+	width: 10%;
+	height: 100vh;
+	float: left;
+	background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0));
+	backdrop-filter: blur(2px);
+	position: fixed;
+	
+
+}
+
+.logo{
+	float: left;
+	padding: 3vh 0;
+	width: 100%;
+	text-align: center;
+	background-color: rgba(1,161,247,0.3);
+	box-shadow: 0px 0px 15px 10px rgba(0,77,118,0.30);
+}
+.logo img{
+	width: 25%;
+}
+
+.logo h2{
+	color: #FFFFFF;
+	padding-top: 3vh;
+}
+
+.Contenido_menu{
+	float: left;
+	width: 100%;
+	padding-top: 10vh;
+}
+.Contenido_menu ul{
+	margin: auto;
+	list-style: none;
+}
+
+.Contenido_menu li img{
+	float: left;
+	width: 15px;
+	padding-top: 20px;
+	margin-left: 20px;
+}
+
+
+
+.Contenido_menu li a{
+	display: block;
+	width: 100%;
+	padding: 20px 30%;
+	color: #fff;
+}
+
+
+.Contenido_menu li:hover{
+	background: linear-gradient(rgba(0,0,0,0.0),rgba(0,72,110,0.3));
+}
+
+.Salir_app{
+	margin-top: 0rem;
+	float: left;
+	width: 100%;
+	background-color: rgba(1,161,247,0.3);
+}
+
+
+.Salir_app img{
+	float: left; 
+	width: 20px;
+	padding-top: 17px;
+	margin-left: 15px;
+	color: #fff;
+}
+
+.Salir_app p{
+	display: block;
+	width: 100%;
+	padding: 18px 30%;
+	color: #fff;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+
+	.logo{
+		padding: 5vh 0;
+	}
+
+
+	.logo h2{
+		display: none;
+	}
+
+	.Salir_app{
+		margin-top: 435px;
+	}
+
+	.menu{
+		overflow: auto;
+	}
+
+
+	
+}
+

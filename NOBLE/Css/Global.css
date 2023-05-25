@@ -1,0 +1,54 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;	
+}
+
+body{
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+/*	  //////////////
+	 ///Cabecera///
+	//////////////	*/
+.supercontenedor{
+	width: 100%;
+	height: auto;
+	float: left;
+	background-color: rgba(31,31,31,0.2);
+}
+
+header{
+	float: right;
+	width: 90%;
+	height: auto;
+	background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0));
+}
+
+.bienvenida{
+	padding: 1vw;
+	float: right;
+	text-align: center;
+	width: 30%;
+}
+
+.bienvenida h3{
+  	color: #fff;
+	font-size: 2vw;
+}
+
+.bienvenida p{
+	color: #fff;
+	font-size: 1vw;
+}
+
+main{
+	float: right;
+    width: 90%;
+	height: auto;
+	padding-right: 2vw;
+}

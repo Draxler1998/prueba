@@ -1,0 +1,14 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;	
+}
+
+body{
+	background-image: url("../../../Imagenes/Index/Registro/Enviado.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
