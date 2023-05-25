@@ -1,0 +1,929 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 17-11-2022 a las 18:02:23
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `noble`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `area`
+--
+
+CREATE TABLE `area` (
+  `IDAREA` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `area`
+--
+
+INSERT INTO `area` (`IDAREA`, `NOMBRE`, `ESTADO`) VALUES
+(1, 'SIN ESPECIFICAR', 1),
+(2, 'TALENTO HUMANO', 1),
+(3, 'FORMACION', 1),
+(4, 'GESTION DE RESULTADOS', 1),
+(5, 'COMERCIAL', 1),
+(6, 'TICS', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ciudad`
+--
+
+CREATE TABLE `ciudad` (
+  `IDCIUDAD` int(255) NOT NULL,
+  `IDEMPRESA` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ciudad`
+--
+
+INSERT INTO `ciudad` (`IDCIUDAD`, `IDEMPRESA`, `NOMBRE`, `ESTADO`) VALUES
+(1, 1, 'SIN ESPECIFICAR', 1),
+(2, 2, 'MANIZALES', 1),
+(3, 2, 'ITAGUI', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `componente`
+--
+
+CREATE TABLE `componente` (
+  `IDCOMPONENTE` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1,
+  `IDSUBLINEA` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `componente`
+--
+
+INSERT INTO `componente` (`IDCOMPONENTE`, `NOMBRE`, `ESTADO`, `IDSUBLINEA`) VALUES
+(1, 'SIN ESPECIFICAR', 1, 0),
+(2, 'HUELLERO', 1, 0),
+(3, 'LAPTOP', 1, 0),
+(4, 'TECLADO', 1, 0),
+(5, 'MOUSE', 1, 0),
+(6, 'MONITOR', 1, 0),
+(7, 'TORRE', 1, 0),
+(8, 'AURICULARES', 1, 0),
+(9, 'IMPRESORA', 1, 0),
+(10, 'TV', 1, 0),
+(11, 'MODEM', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `IDEMPRESA` int(255) NOT NULL,
+  `NIT` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`IDEMPRESA`, `NIT`, `NOMBRE`, `ESTADO`) VALUES
+(1, 0, 'SIN ESPECIFICAR', 1),
+(2, 901208590, 'TRIIBUU', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `equipo`
+--
+
+CREATE TABLE `equipo` (
+  `IDEQUIPO` int(255) NOT NULL,
+  `IDSEDE` int(255) NOT NULL,
+  `IDPUNTO` int(255) NOT NULL,
+  `IDAREA` int(255) NOT NULL,
+  `IDSUBLINEA` int(255) NOT NULL,
+  `IDCOMPONENTE` int(255) NOT NULL,
+  `IDREFERENCIA` int(255) NOT NULL,
+  `SERIAL` varchar(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `CODIGO` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `equipo`
+--
+
+INSERT INTO `equipo` (`IDEQUIPO`, `IDSEDE`, `IDPUNTO`, `IDAREA`, `IDSUBLINEA`, `IDCOMPONENTE`, `IDREFERENCIA`, `SERIAL`, `NOMBRE`, `CODIGO`, `ESTADO`) VALUES
+(1, 1, 1, 1, 1, 1, 1, '0', 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 0),
+(2, 2, 2, 1, 2, 2, 2, 'D14198107', 'COMPONENTE-1', 'TMMR1S1I1P1C-1', 0),
+(3, 2, 3, 2, 3, 7, 3, 'MG00EAMS', 'COMPONENTE-2', 'TMMR1S1I1P2C-2', 0),
+(4, 2, 3, 2, 3, 5, 4, '7CH843006D', 'COMPONENTE-3', 'TMMR1S1I1P2C-3', 0),
+(5, 2, 3, 2, 3, 6, 6, '906NTYT1N162', 'COMPONENTE-4', 'TMMR1S1I1P1C-4', 0),
+(6, 2, 3, 2, 3, 6, 6, '906NTMX1N099', 'COMPONENTE-5', 'TMMR1S1I1P1C-5', 0),
+(7, 2, 3, 2, 3, 8, 7, '1904MH011C88', 'COMPONENTE-6', 'TMMR1S1I1P2C-6', 0),
+(8, 2, 3, 2, 3, 9, 8, '70157PLM1L4H5', 'COMPONENTE-7', 'TMMR1S1I1P2C-7', 0),
+(9, 2, 4, 3, 4, 3, 9, 'GQ94242', 'COMPONENTE-8', 'TMMR1S1I2P1C-8', 0),
+(10, 2, 4, 3, 4, 5, 4, '7CH8430116', 'COMPONENTE-9', 'TMMR1S1I2P1C-9', 0),
+(11, 2, 4, 3, 4, 4, 5, '7CH8182BSC', 'COMPONENTE-10', 'TMMR1S1I2P1C-10', 0),
+(12, 2, 4, 3, 4, 8, 7, '1904MH011C48', 'COMPONENTE-11', 'TMMR1S1I2P1C-11', 0),
+(13, 2, 4, 3, 4, 6, 6, '906NTZN1N429', 'COMPONENTE-12', 'TMMR1S1I2P1C-12', 0),
+(14, 2, 5, 1, 5, 10, 10, '08EE3CNM501377A', 'COMPONENTE-13', 'TMMR1S1I2P1C-13', 0),
+(15, 2, 6, 3, 4, 3, 9, '266KKP2', 'COMPONENTE-14', 'TMMR1S1I2P3C-14', 0),
+(16, 2, 6, 3, 4, 4, 5, '7CH8430066', 'COMPONENTE-15', 'TMMR1S1I2P3C-15', 0),
+(17, 2, 6, 3, 4, 5, 4, '7CH843006F', 'COMPONENTE-16', 'TMMR1S1I2P3C-16', 0),
+(18, 2, 6, 3, 4, 6, 6, '906NTRL1N110', 'COMPONENTE-17', 'TMMR1S1I2P3C-17', 0),
+(19, 2, 6, 3, 4, 8, 11, '2136ME025H18', 'COMPONENTE-18', 'TMMR1S1I2P3C-18', 0),
+(20, 2, 3, 2, 3, 4, 5, '7CH8430012', 'COMPONENTE-19', 'TMMR1S1I1P2C-19', 0),
+(21, 2, 7, 4, 3, 7, 12, '4BY1W52', 'COMPONENTE-20', 'TMMR1S1I3P1C-20', 0),
+(22, 2, 7, 4, 3, 5, 4, '7CH8485F3', 'COMPONENTE-21', 'TMMR1S1I3P1C-21', 0),
+(23, 2, 7, 4, 3, 4, 5, '7CH8430065', 'COMPONENTE-22', 'TMMR1S1I3P1C-22', 0),
+(24, 2, 7, 4, 3, 8, 13, 'SIN ESPECIFICAR', 'COMPONENTE-23', 'TMMR1S1I3P1C-23', 0),
+(25, 2, 7, 4, 3, 6, 6, '903NTTQAC921', 'COMPONENTE-24', 'TMMR1S1I3P1C-24', 0),
+(26, 2, 7, 4, 3, 6, 6, '906NTAB1N248', 'COMPONENTE-25', 'TMMR1S1I3P1C-25', 0),
+(27, 2, 9, 5, 3, 7, 3, 'MG0EAH1', 'COMPONENTE-26', 'TMMR1S1I3P3C-26', 0),
+(28, 2, 9, 5, 3, 5, 4, '7CH8485F0W', 'COMPONENTE-27', 'TMMR1S1I3P3C-27', 0),
+(29, 2, 9, 5, 3, 4, 5, '7CH8484F0X', 'COMPONENTE-28', 'TMMR1S1I3P3C-28', 0),
+(30, 2, 9, 5, 3, 8, 7, '1904MHO115J8', 'COMPONENTE-29', 'TMMR1S1I3P3C-29', 0),
+(31, 2, 9, 5, 3, 6, 6, '903NTUWAD266', 'COMPONENTE-30', 'TMMR1S1I3P3C-30', 0),
+(32, 2, 9, 5, 3, 6, 6, '906NTZN1N261', 'COMPONENTE-31', 'TMMR1S1I3P3C-31', 0),
+(33, 2, 10, 5, 3, 7, 12, 'HN3T382', 'COMPONENTE-32', 'TMMR1S1I3P4C-32', 0),
+(34, 2, 10, 5, 3, 5, 4, '7CH8430113', 'COMPONENTE-33', 'TMMR1S1I3P4C-33', 0),
+(35, 2, 10, 5, 3, 4, 5, '7CH8485F2H', 'COMPONENTE-34', 'TMMR1S1I3P4C-34', 0),
+(36, 2, 10, 5, 3, 6, 6, '903NTABAC952', 'COMPONENTE-35', 'TMMR1S1I3P4C-35', 0),
+(37, 2, 10, 5, 3, 6, 6, '903NTXRAC930', 'COMPONENTE-36', 'TMMR1S1I3P4C-36', 0),
+(38, 2, 11, 5, 3, 7, 12, 'HP7R382', 'COMPONENTE-37', 'TMMR1S1I3P5C-37', 0),
+(39, 2, 11, 5, 3, 5, 4, '7CH8485F11', 'COMPONENTE-38', 'TMMR1S1I3P5C-38', 0),
+(40, 2, 11, 5, 3, 4, 5, '7CH8430064', 'COMPONENTE-39', 'TMMR1S1I3P5C-39', 0),
+(41, 2, 11, 5, 3, 8, 7, '1904MHO11CO8', 'COMPONENTE-40', 'TMMR1S1I3P5C-40', 0),
+(42, 2, 11, 5, 3, 6, 6, '906NTLE1N312', 'COMPONENTE-41', 'TMMR1S1I3P5C-41', 0),
+(43, 2, 11, 5, 3, 6, 6, '903NTTQAC945', 'COMPONENTE-42', 'TMMR1S1I3P5C-42', 0),
+(44, 2, 12, 1, 6, 11, 14, '2209576006598', 'COMPONENTE-43', 'TMMR1S1I4P1C-43', 0),
+(45, 2, 13, 5, 3, 7, 12, 'HP7T382', 'COMPONENTE-44', 'TMMR1S1I4P1C-44', 0),
+(46, 2, 13, 5, 3, 5, 4, '7CH843000Z', 'COMPONENTE-45', 'TMMR1S1I4P2C-45', 0),
+(47, 2, 13, 5, 3, 4, 5, '7CH8485F2G', 'COMPONENTE-46', 'TMMR1S1I4P2C-46', 0),
+(48, 2, 13, 5, 3, 8, 7, '1748MHO1G9G8', 'COMPONENTE-47', 'TMMR1S1I4P2C-47', 0),
+(49, 2, 13, 5, 3, 6, 6, '903NTQDAC916', 'COMPONENTE-48', 'TMMR1S1I4P2C-48', 0),
+(50, 2, 13, 5, 3, 6, 6, '903NTFAAD099', 'COMPONENTE-49', 'TMMR1S1I4P2C-49', 0),
+(51, 2, 14, 5, 3, 7, 12, 'HP7P382', 'COMPONENTE-50', 'TMMR1S1I4P3C-50', 0),
+(52, 2, 14, 5, 3, 5, 4, '7CH8485F2M', 'COMPONENTE-51', 'TMMR1S1I4P3C-51', 0),
+(53, 2, 14, 5, 3, 4, 5, '7CH8430015', 'COMPONENTE-52', 'TMMR1S1I4P3C-52', 0),
+(54, 2, 14, 5, 3, 8, 11, '2136ME028TD8', 'COMPONENTE-53', 'TMMR1S1I4P3C-53', 0),
+(55, 2, 14, 5, 3, 6, 6, '903NTFAAD267', 'COMPONENTE-54', 'TMMR1S1I4P3C-54', 0),
+(56, 2, 14, 5, 3, 6, 6, '903NTQDAD276', 'COMPONENTE-55', 'TMMR1S1I4P3C-55', 0),
+(57, 2, 15, 5, 3, 7, 12, 'HP0Q382', 'COMPONENTE-56', 'TMMR1S1I4P4C-56', 0),
+(58, 2, 15, 5, 3, 5, 4, '7CH8485F2J', 'COMPONENTE-57', 'TMMR1S1I4P4C-57', 0),
+(59, 2, 15, 5, 3, 4, 5, '7CH843006C', 'COMPONENTE-58', 'TMMR1S1I4P4C-58', 0),
+(60, 2, 15, 5, 3, 8, 7, '1904MHO18W28', 'COMPONENTE-59', 'TMMR1S1I4P4C-59', 0),
+(61, 2, 15, 5, 3, 6, 6, '903NTRLAC958', 'COMPONENTE-60', 'TMMR1S1I4P4C-60', 0),
+(62, 2, 15, 5, 3, 6, 6, '903NTLEAC944', 'COMPONENTE-61', 'TMMR1S1I4P4C-61', 0),
+(63, 2, 16, 5, 3, 7, 15, 'MXL5212Q21', 'COMPONENTE-62', 'TMMR1S1I4P5C-62', 0),
+(64, 2, 16, 5, 3, 5, 16, 'X1L96130304128', 'COMPONENTE-63', 'TMMR1S1I4P5C-63', 0),
+(65, 2, 16, 5, 3, 4, 5, '7CH8485F14', 'COMPONENTE-64', 'TMMR1S1I4P5C-64', 0),
+(66, 2, 16, 5, 3, 8, 11, '2136ME028ML8', 'COMPONENTE-65', 'TMMR1S1I4P5C-65', 0),
+(67, 2, 16, 5, 3, 6, 6, '903NTWGAD289', 'COMPONENTE-66', 'TMMR1S1I4P5C-66', 0),
+(68, 2, 16, 5, 3, 6, 6, '906NTNH1N271', 'COMPONENTE-67', 'TMMR1S1I4P5C-67', 0),
+(69, 2, 17, 5, 3, 7, 3, 'MG00EAB3', 'COMPONENTE-68', 'TMMR1S1I4P6C-68', 0),
+(70, 2, 17, 5, 3, 5, 4, '7CH843006C', 'COMPONENTE-69', 'TMMR1S1I4P6C-69', 0),
+(71, 2, 17, 5, 3, 4, 5, '7CH8485F2Q', 'COMPONENTE-70', 'TMMR1S1I4P6C-70', 0),
+(72, 2, 17, 5, 3, 8, 7, '1904MH011018', 'COMPONENTE-71', 'TMMR1S1I4P6C-71', 0),
+(73, 2, 17, 5, 3, 6, 6, '906NTTQ1N241', 'COMPONENTE-72', 'TMMR1S1I4P6C-72', 0),
+(74, 2, 17, 5, 3, 6, 6, '903NTMXAC947', 'COMPONENTE-73', 'TMMR1S1I4P6C-73', 0),
+(75, 2, 18, 5, 3, 7, 12, 'D7TRA482', 'COMPONENTE-74', 'TMMR1S1I4P6C-74', 0),
+(76, 2, 18, 5, 3, 5, 4, '7CH8430064', 'COMPONENTE-75', 'TMMR1S1I4P6C-75', 0),
+(77, 2, 18, 5, 3, 4, 5, '7CH8430110', 'COMPONENTE-76', 'TMMR1S1I4P6C-76', 0),
+(78, 2, 18, 5, 3, 8, 7, '1904MH011528', 'COMPONENTE-77', 'TMMR1S1I4P6C-77', 0),
+(79, 2, 18, 5, 3, 6, 6, '906NTYT1N090', 'COMPONENTE-78', 'TMMR1S1I4P6C-78', 0),
+(80, 2, 18, 5, 3, 6, 6, '903NTFAAD291', 'COMPONENTE-79', 'TMMR1S1I4P6C-79', 0),
+(81, 2, 19, 5, 3, 7, 15, 'MXL522104G', 'COMPONENTE-80', 'TMMR1S1I5P1C-80', 0),
+(82, 2, 19, 5, 3, 5, 4, '7CH8430012', 'COMPONENTE-81', 'TMMR1S1I5P1C-81', 0),
+(83, 2, 19, 5, 3, 4, 5, '7CH8430013', 'COMPONENTE-82', 'TMMR1S1I5P1C-82', 0),
+(84, 2, 19, 5, 3, 8, 11, '2136ME025LN8', 'COMPONENTE-83', 'TMMR1S1I5P1C-83', 0),
+(85, 2, 19, 5, 3, 6, 6, '906NTZN1N117', 'COMPONENTE-84', 'TMMR1S1I5P1C-84', 0),
+(86, 2, 19, 5, 3, 6, 6, '903NTHMAD105', 'COMPONENTE-85', 'TMMR1S1I5P1C-85', 0),
+(87, 2, 20, 5, 3, 7, 12, 'D7TQ482', 'COMPONENTE-86', 'TMMR1S1I5P2C-86', 0),
+(88, 2, 20, 5, 3, 5, 4, '7CH8430017', 'COMPONENTE-87', 'TMMR1S1I5P2C-87', 0),
+(89, 2, 20, 5, 3, 4, 5, '7CH8430114', 'COMPONENTE-88', 'TMMR1S1I5P2C-88', 0),
+(90, 2, 20, 5, 3, 8, 11, '2136ME028MK8', 'COMPONENTE-89', 'TMMR1S1I5P2C-89', 0),
+(91, 2, 20, 5, 3, 6, 6, '903NTJJAC908', 'COMPONENTE-90', 'TMMR1S1I5P2C-90', 0),
+(92, 2, 20, 5, 3, 6, 6, '903NTPCAC960', 'COMPONENTE-91', 'TMMR1S1I5P2C-91', 0),
+(93, 2, 21, 5, 3, 7, 15, 'MXL5212Q20', 'COMPONENTE-92', 'TMMR1S1I5P3C-92', 0),
+(94, 2, 21, 5, 3, 5, 4, '7CH8430067', 'COMPONENTE-93', 'TMMR1S1I5P3C-93', 0),
+(95, 2, 21, 5, 3, 4, 5, '7CH843006', 'COMPONENTE-94', 'TMMR1S1I5P3C-94', 0),
+(96, 2, 21, 5, 3, 8, 11, '213ME028TM8', 'COMPONENTE-95', 'TMMR1S1I5P3C-95', 0),
+(97, 2, 21, 5, 3, 6, 6, '903NTYTAC938', 'COMPONENTE-96', 'TMMR1S1I5P3C-96', 0),
+(98, 2, 21, 5, 3, 6, 6, '903NTJJAD268', 'COMPONENTE-97', 'TMMR1S1I5P3C-97', 0),
+(99, 2, 22, 5, 3, 7, 15, 'MXL5212Q1Q', 'COMPONENTE-98', 'TMMR1S1I5P4C-98', 0),
+(100, 2, 22, 5, 3, 5, 16, 'MXL5212Q1Q', 'COMPONENTE-99', 'TMMR1S1I5P4C-99', 0),
+(101, 2, 22, 5, 3, 4, 5, '7CH8485F12', 'COMPONENTE-100', 'TMMR1S1I5P4C-100', 0),
+(102, 2, 22, 5, 3, 8, 11, '2136ME025H48', 'COMPONENTE-101', 'TMMR1S1I5P4C-101', 0),
+(103, 2, 22, 5, 3, 6, 6, '903NTGYAC919', 'COMPONENTE-102', 'TMMR1S1I5P4C-102', 0),
+(104, 2, 22, 5, 3, 6, 6, '90NTABAD096', 'COMPONENTE-103', 'TMMR1S1I5P4C-103', 0),
+(105, 2, 23, 5, 3, 6, 6, '906NTWG1321', 'COMPONENTE-104', 'TMMR1S1I5P5C-104', 0),
+(106, 2, 23, 5, 3, 6, 6, '903NTNHAC951', 'COMPONENTE-105', 'TMMR1S1I5P5C-105', 0),
+(107, 2, 23, 5, 3, 7, 12, 'HNZR382', 'COMPONENTE-106', 'TMMR1S1I5P5C-106', 0),
+(108, 2, 23, 5, 3, 5, 4, '7CH8485F0Z', 'COMPONENTE-107', 'TMMR1S1I5P5C-107', 0),
+(109, 2, 23, 5, 3, 4, 5, '7CH843010Z', 'COMPONENTE-108', 'TMMR1S1I5P5C-108', 0),
+(110, 2, 23, 5, 3, 8, 7, 'SIN ESPECIFICAR', 'COMPONENTE-109', 'TMMR1S1I5P5C-109', 0),
+(111, 2, 24, 5, 3, 7, 3, 'MG00EA9X', 'COMPONENTE-110', 'TMMR1S1I5P6C-110', 0),
+(112, 2, 24, 5, 3, 5, 4, '7CH8430069', 'COMPONENTE-111', 'TMMR1S1I5P6C-111', 0),
+(113, 2, 24, 5, 3, 4, 5, '7CH8485F2P', 'COMPONENTE-112', 'TMMR1S1I5P6C-112', 0),
+(114, 2, 24, 5, 3, 6, 6, '903NTWGAC953', 'COMPONENTE-113', 'TMMR1S1I5P6C-113', 0),
+(115, 2, 24, 5, 3, 6, 6, '906NTCZ1N139', 'COMPONENTE-114', 'TMMR1S1I5P6C-114', 0),
+(116, 2, 24, 5, 3, 8, 7, 'SIN ESPECIFICAR', 'COMPONENTE-115', 'TMMR1S1I5P6C-115', 0),
+(117, 2, 25, 5, 3, 7, 15, 'MLX5212Q1X', 'COMPONENTE-116', 'TMMR1S1I5P7C-116', 0),
+(118, 2, 25, 5, 3, 5, 4, '7CH8484F10', 'COMPONENTE-117', 'TMMR1S1I5P7C-117', 0),
+(119, 2, 25, 5, 3, 4, 5, '7CH8485F0V', 'COMPONENTE-118', 'TMMR1S1I5P7C-118', 0),
+(120, 2, 25, 5, 3, 8, 7, '1748MH01GLW8', 'COMPONENTE-119', 'TMMR1S1I5P7C-119', 0),
+(121, 2, 25, 5, 3, 6, 6, '906NTWG1N297', 'COMPONENTE-120', 'TMMR1S1I5P7C-120', 0),
+(122, 2, 25, 5, 3, 6, 6, '903NTUWAC878', 'COMPONENTE-121', 'TMMR1S1I5P7C-121', 0),
+(123, 2, 26, 1, 5, 10, 10, '09LT3CDN704301V', 'COMPONENTE-122', 'TMMR1S1I6P1C-122', 0),
+(124, 2, 29, 5, 3, 7, 12, 'HN8R382', 'COMPONENTE-123', 'TMMR1S1I7P3C-123', 0),
+(125, 2, 29, 5, 3, 5, 4, 'SIN ESPECIFICAR', 'COMPONENTE-124', 'TMMR1S1I7P3C-124', 0),
+(126, 2, 29, 5, 3, 4, 5, '7CH8430117', 'COMPONENTE-125', 'TMMR1S1I7P3C-125', 0),
+(127, 2, 29, 5, 3, 8, 11, '2136ME025H08', 'COMPONENTE-126', 'TMMR1S1I7P3C-126', 0),
+(128, 2, 29, 5, 3, 6, 6, '906NTYT1N114', 'COMPONENTE-127', 'TMMR1S1I7P3C-127', 0),
+(129, 2, 29, 5, 3, 6, 6, '906NTXR1N466', 'COMPONENTE-128', 'TMMR1S1I7P3C-128', 0),
+(130, 2, 30, 5, 3, 7, 3, 'MG00DEACN', 'COMPONENTE-129', 'TMMR1S1I7P4C-129', 0),
+(131, 2, 30, 5, 3, 5, 4, '7CH8430015', 'COMPONENTE-130', 'TMMR1S1I7P4C-130', 0),
+(132, 2, 30, 5, 3, 4, 5, '7CH8430111', 'COMPONENTE-131', 'TMMR1S1I7P4C-131', 0),
+(133, 2, 30, 5, 3, 8, 7, '1904MH0114P8', 'COMPONENTE-132', 'TMMR1S1I7P4C-132', 0),
+(134, 2, 30, 5, 3, 6, 6, '903NTWGAC905', 'COMPONENTE-133', 'TMMR1S1I7P4C-133', 0),
+(135, 2, 30, 5, 3, 6, 6, '906NTPC1N472', 'COMPONENTE-134', 'TMMR1S1I7P4C-134', 0),
+(136, 2, 31, 5, 3, 7, 15, 'MXL522104R', 'COMPONENTE-135', 'TMMR1S1I7P4C-135', 0),
+(137, 2, 31, 5, 3, 5, 4, '7CH8485DZJ', 'COMPONENTE-136', 'TMMR1S1I7P5C-136', 0),
+(138, 2, 31, 5, 3, 4, 5, '7CH843006D', 'COMPONENTE-137', 'TMMR1S1I7P5C-137', 0),
+(139, 2, 31, 5, 3, 8, 7, '1904MHO18W08', 'COMPONENTE-138', 'TMMR1S1I7P5C-138', 0),
+(140, 2, 31, 5, 3, 6, 6, '906NTHM1N281', 'COMPONENTE-139', 'TMMR1S1I7P5C-139', 0),
+(141, 2, 31, 5, 3, 6, 6, '903NTDVAC922', 'COMPONENTE-140', 'TMMR1S1I7P5C-140', 0),
+(142, 2, 32, 5, 3, 7, 3, 'MG00EAAF', 'COMPONENTE-141', 'TMMR1S1I8P1C-141', 0),
+(143, 2, 32, 5, 3, 5, 4, '7CH8430115', 'COMPONENTE-142', 'TMMR1S1I8P1C-142', 0),
+(144, 2, 32, 5, 3, 4, 5, '7H8430010', 'COMPONENTE-143', 'TMMR1S1I8P1C-143', 0),
+(145, 2, 32, 5, 3, 8, 11, '881000228', 'COMPONENTE-144', 'TMMR1S1I8P1C-144', 0),
+(146, 2, 32, 5, 3, 6, 6, '906NTFA1N155', 'COMPONENTE-145', 'TMMR1S1I8P1C-145', 0),
+(147, 2, 32, 5, 3, 6, 6, '906NTVS1N135', 'COMPONENTE-146', 'TMMR1S1I8P1C-146', 0),
+(148, 2, 33, 5, 3, 7, 15, 'MXL5212Q24', 'COMPONENTE-147', 'TMMR1S1I8P2C-147', 0),
+(149, 2, 33, 5, 3, 5, 4, '7CH8430065', 'COMPONENTE-148', 'TMMR1S1I8P2C-148', 0),
+(150, 2, 33, 5, 3, 4, 5, '7CH8485F2R', 'COMPONENTE-149', 'TMMR1S1I8P2C-149', 0),
+(151, 2, 33, 5, 3, 8, 11, '2136ME028TQ8', 'COMPONENTE-150', 'TMMR1S1I8P2C-150', 0),
+(152, 2, 33, 5, 3, 6, 6, '903NTKFAC925', 'COMPONENTE-151', 'TMMR1S1I8P2C-151', 0),
+(153, 2, 33, 5, 3, 6, 6, '903NTKFAD285', 'COMPONENTE-152', 'TMMR1S1I8P2C-152', 0),
+(154, 2, 35, 5, 3, 7, 15, 'MXL5212Q25', 'COMPONENTE-153', 'TMMR1S1I8P4C-153', 0),
+(155, 2, 35, 5, 3, 5, 4, '7CH8430010', 'COMPONENTE-154', 'TMMR1S1I8P4C-154', 0),
+(156, 2, 35, 5, 3, 4, 5, '7CH8485F2N', 'COMPONENTE-155', 'TMMR1S1I8P4C-155', 0),
+(157, 2, 35, 5, 3, 8, 11, '2136ME028TK8', 'COMPONENTE-156', 'TMMR1S1I8P4C-156', 0),
+(158, 2, 35, 5, 3, 6, 6, '906NTVS1N327', 'COMPONENTE-157', 'TMMR1S1I8P4C-157', 0),
+(159, 2, 35, 5, 3, 6, 6, '903NTCZAD107', 'COMPONENTE-158', 'TMMR1S1I8P4C-158', 0),
+(160, 2, 36, 5, 3, 7, 12, 'HP3V382', 'COMPONENTE-159', 'TMMR1S1I8P5C-159', 0),
+(161, 2, 36, 5, 3, 5, 4, '7CH8430014', 'COMPONENTE-160', 'TMMR1S1I8P5C-160', 0),
+(162, 2, 36, 5, 3, 4, 5, '7CH8485F2J', 'COMPONENTE-161', 'TMMR1S1I8P5C-161', 0),
+(163, 2, 36, 5, 3, 8, 11, '881000228', 'COMPONENTE-162', 'TMMR1S1I8P5C-162', 0),
+(164, 2, 36, 5, 3, 6, 6, '903NTWG4H201', 'COMPONENTE-163', 'TMMR1S1I8P5C-163', 0),
+(165, 2, 36, 5, 3, 6, 6, '906NTNH1N319', 'COMPONENTE-164', 'TMMR1S1I8P5C-164', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estacion`
+--
+
+CREATE TABLE `estacion` (
+  `IDESTACION` int(255) NOT NULL,
+  `IDEMPRESA` int(255) NOT NULL,
+  `IDCIUDAD` int(255) NOT NULL,
+  `IDSEDE` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `CODIGO` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estacion`
+--
+
+INSERT INTO `estacion` (`IDESTACION`, `IDEMPRESA`, `IDCIUDAD`, `IDSEDE`, `NOMBRE`, `CODIGO`, `ESTADO`) VALUES
+(1, 1, 1, 1, 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 1),
+(2, 2, 2, 2, 'RACK-1', 'TMMR-1', 1),
+(3, 2, 3, 3, 'RACK-1', 'TIPR-1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `isla`
+--
+
+CREATE TABLE `isla` (
+  `IDISLA` int(255) NOT NULL,
+  `IDSEDE` int(255) NOT NULL,
+  `IDSUCURSAL` int(255) NOT NULL,
+  `IDESTACION` int(255) NOT NULL,
+  `IDSUBESTACION` int(255) NOT NULL,
+  `NOMBRE` varchar(255) DEFAULT NULL,
+  `CODIGO` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `isla`
+--
+
+INSERT INTO `isla` (`IDISLA`, `IDSEDE`, `IDSUCURSAL`, `IDESTACION`, `IDSUBESTACION`, `NOMBRE`, `CODIGO`, `ESTADO`) VALUES
+(1, 1, 1, 1, 1, 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 1),
+(2, 2, 2, 2, 2, 'ISLA-1', 'TMMR1S1I-1', 1),
+(3, 2, 2, 2, 2, 'ISLA-2', 'TMMR1S1I-2', 1),
+(4, 2, 2, 2, 2, 'ISLA-3', 'TMMR1S1I-3', 1),
+(5, 2, 2, 2, 2, 'ISLA-4', 'TMMR1S1I-4', 1),
+(6, 2, 2, 2, 2, 'ISLA-5', 'TMMR1S1I-5', 1),
+(7, 2, 2, 2, 2, 'ISLA-6', 'TMMR1S1I-6', 1),
+(8, 2, 2, 2, 2, 'ISLA-7', 'TMMR1S1I-7', 1),
+(9, 2, 2, 2, 2, 'ISLA-8', 'TMMR1S1I-8', 1),
+(10, 2, 2, 2, 3, 'ISLA-9', 'TMMR1S2I-1', 1),
+(11, 2, 2, 2, 3, 'ISLA-10', 'TMMR1S2I-2', 1),
+(12, 2, 2, 2, 3, 'ISLA-11', 'TMMR1S2I-3', 1),
+(13, 2, 2, 2, 3, 'ISLA-12', 'TMMR1S2I-4', 1),
+(14, 3, 3, 3, 4, 'ISLA-1', 'TIPR1S1I-1', 1),
+(15, 3, 3, 3, 4, 'ISLA-2', 'TIPR1S1I-2', 1),
+(16, 3, 3, 3, 4, 'ISLA-3', 'TIPR1S1I-3', 1),
+(17, 3, 3, 3, 4, 'ISLA-4', 'TIPR1S1I-4', 1),
+(18, 3, 3, 3, 4, 'ISLA-5', 'TIPR1S1I-5', 1),
+(19, 3, 3, 3, 5, 'ISLA-6', 'TIPR1S2I-1', 1),
+(20, 3, 3, 3, 5, 'ISLA-7', 'TIPR1S2I-2', 1),
+(21, 3, 3, 3, 5, 'ISLA-8', 'TIPR1S2I-3', 1),
+(22, 3, 3, 3, 5, 'ISLA-9', 'TIPR1S2I-4', 1),
+(23, 3, 3, 3, 5, 'ISLA-10', 'TIPR1S2I-5', 1),
+(24, 3, 3, 3, 5, 'ISLA-11', 'TIPR1S2I-6', 1),
+(25, 3, 3, 3, 5, 'ISLA-12', 'TIPR1S2I-7', 1),
+(26, 3, 3, 3, 5, 'ISLA-13', 'TIPR1S2I-8', 1),
+(27, 3, 3, 3, 5, 'ISLA-14', 'TIPR1S2I-9', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `linea`
+--
+
+CREATE TABLE `linea` (
+  `IDLINEA` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(255) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `linea`
+--
+
+INSERT INTO `linea` (`IDLINEA`, `NOMBRE`, `ESTADO`) VALUES
+(1, 'SIN ESPECIFICAR', 1),
+(2, 'CONTROL DE ACCESO', 1),
+(3, 'COMPUTADOR', 1),
+(4, 'REPRODUCTOR DE IMAGEN', 1),
+(5, 'RED', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marca`
+--
+
+CREATE TABLE `marca` (
+  `IDMARCA` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`IDMARCA`, `NOMBRE`, `ESTADO`) VALUES
+(1, 'SIN ESPECIFICAR', 1),
+(2, 'HIKVISION', 1),
+(3, 'DELL', 1),
+(4, 'HP', 1),
+(5, 'LENOVO', 1),
+(6, 'LG', 1),
+(7, 'LOGITECH', 1),
+(8, 'LEXMARK', 1),
+(9, 'SAMSUNG', 1),
+(10, 'KOTION EACH', 1),
+(11, 'MERCURISYS', 1),
+(12, 'GENIUS', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `punto`
+--
+
+CREATE TABLE `punto` (
+  `IDPUNTO` int(11) NOT NULL,
+  `IDCIUDAD` int(11) NOT NULL,
+  `IDSEDE` int(255) NOT NULL,
+  `IDESTACION` int(255) NOT NULL,
+  `IDSUBESTACION` int(255) NOT NULL,
+  `IDISLA` int(255) NOT NULL,
+  `NOMBRE` varchar(255) DEFAULT NULL,
+  `CODIGO` varchar(255) NOT NULL,
+  `NPUNTO` int(255) NOT NULL DEFAULT 0,
+  `IP` varchar(255) NOT NULL DEFAULT '0.0.0.0',
+  `AREA` int(255) NOT NULL DEFAULT 1,
+  `ESTADO` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `punto`
+--
+
+INSERT INTO `punto` (`IDPUNTO`, `IDCIUDAD`, `IDSEDE`, `IDESTACION`, `IDSUBESTACION`, `IDISLA`, `NOMBRE`, `CODIGO`, `NPUNTO`, `IP`, `AREA`, `ESTADO`) VALUES
+(1, 1, 1, 1, 1, 1, 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 0, '0.0.0.0', 1, 0),
+(2, 2, 2, 2, 2, 2, 'PUNTO-1', 'TMMR1S1I1P-1', 0, '0.0.0.0', 1, 1),
+(3, 2, 2, 2, 2, 2, 'PUNTO-2', 'TMMR1S1I1P-2', 0, '0.0.0.0', 1, 1),
+(4, 2, 2, 2, 2, 3, 'PUNTO-3', 'TMMR1S1I2P-1', 0, '0.0.0.0', 1, 1),
+(5, 2, 2, 2, 2, 3, 'PUNTO-4', 'TMMR1S1I2P-2', 0, '0.0.0.0', 1, 1),
+(6, 2, 2, 2, 2, 3, 'PUNTO-5', 'TMMR1S1I2P-3', 0, '0.0.0.0', 1, 1),
+(7, 2, 2, 2, 2, 4, 'PUNTO-6', 'TMMR1S1I3P-1', 0, '0.0.0.0', 1, 1),
+(8, 2, 2, 2, 2, 4, 'PUNTO-7', 'TMMR1S1I3P-2', 0, '0.0.0.0', 1, 0),
+(9, 2, 2, 2, 2, 4, 'PUNTO-8', 'TMMR1S1I3P-3', 0, '0.0.0.0', 1, 0),
+(10, 2, 2, 2, 2, 4, 'PUNTO-9', 'TMMR1S1I3P-4', 0, '0.0.0.0', 1, 0),
+(11, 2, 2, 2, 2, 4, 'PUNTO-10', 'TMMR1S1I3P-5', 0, '0.0.0.0', 1, 0),
+(12, 2, 2, 2, 2, 5, 'PUNTO-11', 'TMMR1S1I4P-1', 0, '0.0.0.0', 1, 1),
+(13, 2, 2, 2, 2, 5, 'PUNTO-12', 'TMMR1S1I4P-2', 0, '0.0.0.0', 1, 0),
+(14, 2, 2, 2, 2, 5, 'PUNTO-13', 'TMMR1S1I4P-3', 0, '0.0.0.0', 1, 0),
+(15, 2, 2, 2, 2, 5, 'PUNTO-14', 'TMMR1S1I4P-4', 0, '0.0.0.0', 1, 1),
+(16, 2, 2, 2, 2, 5, 'PUNTO-15', 'TMMR1S1I4P-5', 0, '0.0.0.0', 1, 0),
+(17, 2, 2, 2, 2, 5, 'PUNTO-16', 'TMMR1S1I4P-6', 0, '0.0.0.0', 1, 0),
+(18, 2, 2, 2, 2, 5, 'PUNTO-17', 'TMMR1S1I4P-7', 0, '0.0.0.0', 1, 1),
+(19, 2, 2, 2, 2, 6, 'PUNTO-18', 'TMMR1S1I5P-1', 0, '0.0.0.0', 1, 1),
+(20, 2, 2, 2, 2, 6, 'PUNTO-19', 'TMMR1S1I5P-2', 0, '0.0.0.0', 1, 0),
+(21, 2, 2, 2, 2, 6, 'PUNTO-20', 'TMMR1S1I5P-3', 0, '0.0.0.0', 1, 1),
+(22, 2, 2, 2, 2, 6, 'PUNTO-21', 'TMMR1S1I5P-4', 0, '0.0.0.0', 1, 1),
+(23, 2, 2, 2, 2, 6, 'PUNTO-22', 'TMMR1S1I5P-5', 0, '0.0.0.0', 1, 1),
+(24, 2, 2, 2, 2, 6, 'PUNTO-23', 'TMMR1S1I5P-6', 0, '0.0.0.0', 1, 0),
+(25, 2, 2, 2, 2, 6, 'PUNTO-24', 'TMMR1S1I5P-7', 0, '0.0.0.0', 1, 1),
+(26, 2, 2, 2, 2, 7, 'PUNTO-25', 'TMMR1S1I6P-1', 0, '0.0.0.0', 1, 1),
+(27, 2, 2, 2, 2, 8, 'PUNTO-26', 'TMMR1S1I7P-1', 0, '0.0.0.0', 1, 1),
+(28, 2, 2, 2, 2, 8, 'PUNTO-27', 'TMMR1S1I7P-2', 0, '0.0.0.0', 1, 0),
+(29, 2, 2, 2, 2, 8, 'PUNTO-28', 'TMMR1S1I7P-3', 0, '0.0.0.0', 1, 1),
+(30, 2, 2, 2, 2, 8, 'PUNTO-29', 'TMMR1S1I7P-4', 0, '0.0.0.0', 1, 1),
+(31, 2, 2, 2, 2, 8, 'PUNTO-30', 'TMMR1S1I7P-5', 0, '0.0.0.0', 1, 1),
+(32, 2, 2, 2, 2, 9, 'PUNTO-31', 'TMMR1S1I8P-1', 0, '0.0.0.0', 1, 1),
+(33, 2, 2, 2, 2, 9, 'PUNTO-32', 'TMMR1S1I8P-2', 0, '0.0.0.0', 1, 1),
+(34, 2, 2, 2, 2, 9, 'PUNTO-33', 'TMMR1S1I8P-3', 0, '0.0.0.0', 1, 1),
+(35, 2, 2, 2, 2, 9, 'PUNTO-34', 'TMMR1S1I8P-4', 0, '0.0.0.0', 1, 1),
+(36, 2, 2, 2, 2, 9, 'PUNTO-35', 'TMMR1S1I8P-5', 0, '0.0.0.0', 1, 1),
+(37, 2, 2, 2, 3, 10, 'PUNTO-36', 'TMMR1S2I1P-1', 0, '0.0.0.0', 1, 0),
+(38, 2, 2, 2, 3, 10, 'PUNTO-37', 'TMMR1S2I1P-2', 0, '0.0.0.0', 1, 0),
+(39, 2, 2, 2, 3, 10, 'PUNTO-38', 'TMMR1S2I1P-3', 0, '0.0.0.0', 1, 0),
+(40, 2, 2, 2, 3, 10, 'PUNTO-39', 'TMMR1S2I1P-4', 0, '0.0.0.0', 1, 0),
+(41, 2, 2, 2, 3, 10, 'PUNTO-40', 'TMMR1S2I1P-5', 0, '0.0.0.0', 1, 0),
+(42, 2, 2, 2, 3, 10, 'PUNTO-41', 'TMMR1S2I1P-6', 0, '0.0.0.0', 1, 0),
+(43, 2, 2, 2, 3, 10, 'PUNTO-42', 'TMMR1S2I1P-7', 0, '0.0.0.0', 1, 0),
+(44, 2, 2, 2, 3, 11, 'PUNTO-43', 'TMMR1S2I2P-1', 0, '0.0.0.0', 1, 0),
+(45, 2, 2, 2, 3, 11, 'PUNTO-44', 'TMMR1S2I2P-2', 0, '0.0.0.0', 1, 0),
+(46, 2, 2, 2, 3, 11, 'PUNTO-45', 'TMMR1S2I2P-3', 0, '0.0.0.0', 1, 0),
+(47, 2, 2, 2, 3, 11, 'PUNTO-46', 'TMMR1S2I2P-4', 0, '0.0.0.0', 1, 0),
+(48, 2, 2, 2, 3, 11, 'PUNTO-47', 'TMMR1S2I2P-5', 0, '0.0.0.0', 1, 0),
+(49, 2, 2, 2, 3, 11, 'PUNTO-48', 'TMMR1S2I2P-6', 0, '0.0.0.0', 1, 0),
+(50, 2, 2, 2, 3, 11, 'PUNTO-49', 'TMMR1S2I2P-7', 0, '0.0.0.0', 1, 0),
+(51, 2, 2, 2, 3, 12, 'PUNTO-50', 'TMMR1S2I3P-1', 0, '0.0.0.0', 1, 0),
+(52, 2, 2, 2, 3, 13, 'PUNTO-51', 'TMMR1S2I4P-1', 0, '0.0.0.0', 1, 0),
+(53, 3, 3, 3, 4, 14, 'PUNTO-1', 'TIPR1S1I1P-1', 0, '0.0.0.0', 1, 0),
+(54, 3, 3, 3, 4, 14, 'PUNTO-2', 'TIPR1S1I1P-2', 0, '0.0.0.0', 1, 0),
+(55, 3, 3, 3, 4, 15, 'PUNTO-3', 'TIPR1S1I2P-1', 0, '0.0.0.0', 1, 0),
+(56, 3, 3, 3, 4, 15, 'PUNTO-4', 'TIPR1S1I2P-2', 0, '0.0.0.0', 1, 0),
+(57, 3, 3, 3, 4, 15, 'PUNTO-5', 'TIPR1S1I2P-3', 0, '0.0.0.0', 1, 0),
+(58, 3, 3, 3, 4, 15, 'PUNTO-6', 'TIPR1S1I2P-4', 0, '0.0.0.0', 1, 0),
+(59, 3, 3, 3, 4, 15, 'PUNTO-7', 'TIPR1S1I2P-5', 0, '0.0.0.0', 1, 0),
+(60, 3, 3, 3, 4, 15, 'PUNTO-8', 'TIPR1S1I2P-6', 0, '0.0.0.0', 1, 0),
+(61, 3, 3, 3, 4, 15, 'PUNTO-9', 'TIPR1S1I2P-7', 0, '0.0.0.0', 1, 0),
+(62, 3, 3, 3, 4, 15, 'PUNTO-10', 'TIPR1S1I2P-8', 0, '0.0.0.0', 1, 0),
+(63, 3, 3, 3, 4, 15, 'PUNTO-11', 'TIPR1S1I2P-9', 0, '0.0.0.0', 1, 0),
+(64, 3, 3, 3, 4, 15, 'PUNTO-12', 'TIPR1S1I2P-10', 0, '0.0.0.0', 1, 0),
+(65, 3, 3, 3, 4, 16, 'PUNTO-13', 'TIPR1S1I3P-1', 0, '0.0.0.0', 1, 0),
+(66, 3, 3, 3, 4, 16, 'PUNTO-14', 'TIPR1S1I3P-2', 0, '0.0.0.0', 1, 0),
+(67, 3, 3, 3, 4, 16, 'PUNTO-15', 'TIPR1S1I3P-3', 0, '0.0.0.0', 1, 0),
+(68, 3, 3, 3, 4, 16, 'PUNTO-16', 'TIPR1S1I3P-4', 0, '0.0.0.0', 1, 0),
+(69, 3, 3, 3, 4, 16, 'PUNTO-17', 'TIPR1S1I3P-5', 0, '0.0.0.0', 1, 0),
+(70, 3, 3, 3, 4, 16, 'PUNTO-18', 'TIPR1S1I3P-6', 0, '0.0.0.0', 1, 0),
+(71, 3, 3, 3, 4, 16, 'PUNTO-19', 'TIPR1S1I3P-7', 0, '0.0.0.0', 1, 0),
+(72, 3, 3, 3, 4, 16, 'PUNTO-20', 'TIPR1S1I3P-8', 0, '0.0.0.0', 1, 0),
+(73, 3, 3, 3, 4, 16, 'PUNTO-21', 'TIPR1S1I3P-9', 0, '0.0.0.0', 1, 0),
+(74, 3, 3, 3, 4, 17, 'PUNTO-22', 'TIPR1S1I4P-1', 0, '0.0.0.0', 1, 0),
+(75, 3, 3, 3, 4, 17, 'PUNTO-23', 'TIPR1S1I4P-2', 0, '0.0.0.0', 1, 0),
+(76, 3, 3, 3, 4, 17, 'PUNTO-24', 'TIPR1S1I4P-3', 0, '0.0.0.0', 1, 0),
+(77, 3, 3, 3, 4, 17, 'PUNTO-25', 'TIPR1S1I4P-4', 0, '0.0.0.0', 1, 0),
+(78, 3, 3, 3, 4, 17, 'PUNTO-26', 'TIPR1S1I4P-5', 0, '0.0.0.0', 1, 0),
+(79, 3, 3, 3, 4, 17, 'PUNTO-27', 'TIPR1S1I4P-6', 0, '0.0.0.0', 1, 0),
+(80, 3, 3, 3, 4, 17, 'PUNTO-28', 'TIPR1S1I4P-7', 0, '0.0.0.0', 1, 0),
+(81, 3, 3, 3, 4, 17, 'PUNTO-29', 'TIPR1S1I4P-8', 0, '0.0.0.0', 1, 0),
+(82, 3, 3, 3, 4, 17, 'PUNTO-30', 'TIPR1S1I4P-9', 0, '0.0.0.0', 1, 0),
+(83, 3, 3, 3, 4, 17, 'PUNTO-31', 'TIPR1S1I4P-10', 0, '0.0.0.0', 1, 0),
+(84, 3, 3, 3, 4, 18, 'PUNTO-32', 'TIPR1S1I5P-1', 0, '0.0.0.0', 1, 0),
+(85, 3, 3, 3, 4, 18, 'PUNTO-33', 'TIPR1S1I5P-2', 0, '0.0.0.0', 1, 0),
+(86, 3, 3, 3, 4, 18, 'PUNTO-34', 'TIPR1S1I5P-3', 0, '0.0.0.0', 1, 0),
+(87, 3, 3, 3, 4, 18, 'PUNTO-35', 'TIPR1S1I5P-4', 0, '0.0.0.0', 1, 0),
+(88, 3, 3, 3, 4, 18, 'PUNTO-36', 'TIPR1S1I5P-5', 0, '0.0.0.0', 1, 0),
+(89, 3, 3, 3, 4, 18, 'PUNTO-37', 'TIPR1S1I5P-6', 0, '0.0.0.0', 1, 0),
+(90, 3, 3, 3, 4, 18, 'PUNTO-38', 'TIPR1S1I5P-7', 0, '0.0.0.0', 1, 0),
+(91, 3, 3, 3, 4, 18, 'PUNTO-39', 'TIPR1S1I5P-8', 0, '0.0.0.0', 1, 0),
+(92, 3, 3, 3, 4, 18, 'PUNTO-40', 'TIPR1S1I5P-9', 0, '0.0.0.0', 1, 0),
+(93, 3, 3, 3, 4, 18, 'PUNTO-41', 'TIPR1S1I5P-10', 0, '0.0.0.0', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `referencia`
+--
+
+CREATE TABLE `referencia` (
+  `IDREFERENCIA` int(255) NOT NULL,
+  `IDMARCA` int(255) NOT NULL,
+  `IDCOMPONENTE` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `PRECIO` int(255) DEFAULT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `referencia`
+--
+
+INSERT INTO `referencia` (`IDREFERENCIA`, `IDMARCA`, `IDCOMPONENTE`, `NOMBRE`, `PRECIO`, `ESTADO`) VALUES
+(1, 1, 1, 'SIN ESPECIFICAR', 0, 1),
+(2, 2, 2, 'DS-K1T8003EF', 280000, 1),
+(3, 5, 7, 'THINKCENTRE M93P', 737698, 1),
+(4, 4, 5, 'HM01', 53079, 1),
+(5, 4, 4, 'K45', 43609, 1),
+(6, 6, 6, '24MK430H', 679900, 1),
+(7, 7, 8, 'H390', 94000, 1),
+(8, 8, 9, 'MX417DE', 1680000, 1),
+(9, 3, 3, 'INSPIRON 5570', 2034679, 1),
+(10, 9, 10, 'UN65RU7100', 3000000, 1),
+(11, 7, 8, 'H570E', 169736, 1),
+(12, 3, 7, 'OPTIPLEX 9020', 750000, 1),
+(13, 10, 8, 'G2000', 70000, 1),
+(14, 11, 11, 'MW302R', 60000, 1),
+(15, 4, 7, 'PRODESK 600 G1', 641000, 1),
+(16, 12, 5, 'DX-120', 16900, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `IDROL` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`IDROL`, `NOMBRE`, `ESTADO`) VALUES
+(1, 'SIN ESPECIFICAR', 1),
+(2, 'ADMINISTRADOR', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sede`
+--
+
+CREATE TABLE `sede` (
+  `IDSEDE` int(255) NOT NULL,
+  `IDEMPRESA` int(255) NOT NULL,
+  `IDCIUDAD` int(255) NOT NULL,
+  `IDUSUARIO` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `DIRECCION` varchar(255) NOT NULL,
+  `TELEFONO` varchar(255) NOT NULL,
+  `ENCARGADO` varchar(255) NOT NULL,
+  `CORREO` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `sede`
+--
+
+INSERT INTO `sede` (`IDSEDE`, `IDEMPRESA`, `IDCIUDAD`, `IDUSUARIO`, `NOMBRE`, `DIRECCION`, `TELEFONO`, `ENCARGADO`, `CORREO`, `ESTADO`) VALUES
+(1, 1, 1, 1, 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 1),
+(2, 2, 2, 2, 'MANIZALES', 'CRA 23  70-93', '3013781926', 'STEFANIA LOPEZ', 'STEFANIA.LOPEZ@FINOSERVICES.COM', 1),
+(3, 2, 3, 3, 'PLATINO', 'CRA. 52D 76-67 LOCAL 1138, ITAGÜI', '3157704562', 'DENIS LOAIZA', 'DENIS.LOAIZA@FINOSERVICES.COM', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subestacion`
+--
+
+CREATE TABLE `subestacion` (
+  `IDSUBESTACION` int(255) NOT NULL,
+  `IDCIUDAD` int(255) NOT NULL,
+  `IDSEDE` int(255) NOT NULL,
+  `IDESTACION` int(255) NOT NULL,
+  `NOMBRE` varchar(255) DEFAULT NULL,
+  `CODIGO` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `subestacion`
+--
+
+INSERT INTO `subestacion` (`IDSUBESTACION`, `IDCIUDAD`, `IDSEDE`, `IDESTACION`, `NOMBRE`, `CODIGO`, `ESTADO`) VALUES
+(1, 1, 1, 1, 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 1),
+(2, 2, 2, 2, 'SWITCH-1', 'TMMR1S-1', 1),
+(3, 2, 2, 2, 'SWITCH-2', 'TMMR1S-2', 1),
+(4, 3, 3, 3, 'SWITCH-1', 'TIPR1S-1', 1),
+(5, 3, 3, 3, 'SWITCH-2', 'TIPR1S-2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sublinea`
+--
+
+CREATE TABLE `sublinea` (
+  `IDSUBLINEA` int(255) NOT NULL,
+  `IDLINEA` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `sublinea`
+--
+
+INSERT INTO `sublinea` (`IDSUBLINEA`, `IDLINEA`, `NOMBRE`, `ESTADO`) VALUES
+(1, 1, 'SIN ESPECIFICAR', 1),
+(2, 2, 'HUELLA Y CARNET', 1),
+(3, 3, 'ESCRITORIO', 1),
+(4, 3, 'PORTATIL', 1),
+(5, 4, 'TELEVISOR', 1),
+(6, 5, 'MODEM', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `IDUSUARIO` int(255) NOT NULL,
+  `IDEMPRESA` int(255) NOT NULL,
+  `IDCIUDAD` int(255) NOT NULL,
+  `DOCUMENTO` int(255) NOT NULL,
+  `NOMBRE` varchar(255) NOT NULL,
+  `APELLIDO` varchar(255) NOT NULL,
+  `CORREO` varchar(255) NOT NULL,
+  `CONTRASEÑA` varchar(255) NOT NULL,
+  `ROL` int(255) NOT NULL DEFAULT 0,
+  `REGISTRO` date NOT NULL,
+  `ESTADO` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`IDUSUARIO`, `IDEMPRESA`, `IDCIUDAD`, `DOCUMENTO`, `NOMBRE`, `APELLIDO`, `CORREO`, `CONTRASEÑA`, `ROL`, `REGISTRO`, `ESTADO`) VALUES
+(1, 1, 1, 0, 'SIN ESPECIFICAR', 'SIN ESPECIFICAR', 'SIN@ESPECIFICAR.COM', '0000', 0, '2022-06-01', 0),
+(2, 2, 2, 1121205201, 'GIOVANNY', 'AVILA', 'GIOVANNY.AVILA@FINOSERVICES.COM', '123', 2, '2022-08-30', 1),
+(3, 2, 3, 1214737779, 'MANUEL', 'MURILLO', 'MANUEL.MURILLO@FINOSERVICES.COM', '123', 2, '2022-11-16', 1);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `area`
+--
+ALTER TABLE `area`
+  ADD PRIMARY KEY (`IDAREA`);
+
+--
+-- Indices de la tabla `ciudad`
+--
+ALTER TABLE `ciudad`
+  ADD PRIMARY KEY (`IDCIUDAD`);
+
+--
+-- Indices de la tabla `componente`
+--
+ALTER TABLE `componente`
+  ADD PRIMARY KEY (`IDCOMPONENTE`);
+
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`IDEMPRESA`);
+
+--
+-- Indices de la tabla `equipo`
+--
+ALTER TABLE `equipo`
+  ADD PRIMARY KEY (`IDEQUIPO`);
+
+--
+-- Indices de la tabla `estacion`
+--
+ALTER TABLE `estacion`
+  ADD PRIMARY KEY (`IDESTACION`);
+
+--
+-- Indices de la tabla `isla`
+--
+ALTER TABLE `isla`
+  ADD PRIMARY KEY (`IDISLA`);
+
+--
+-- Indices de la tabla `linea`
+--
+ALTER TABLE `linea`
+  ADD PRIMARY KEY (`IDLINEA`);
+
+--
+-- Indices de la tabla `marca`
+--
+ALTER TABLE `marca`
+  ADD PRIMARY KEY (`IDMARCA`);
+
+--
+-- Indices de la tabla `punto`
+--
+ALTER TABLE `punto`
+  ADD PRIMARY KEY (`IDPUNTO`);
+
+--
+-- Indices de la tabla `referencia`
+--
+ALTER TABLE `referencia`
+  ADD PRIMARY KEY (`IDREFERENCIA`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`IDROL`);
+
+--
+-- Indices de la tabla `sede`
+--
+ALTER TABLE `sede`
+  ADD PRIMARY KEY (`IDSEDE`);
+
+--
+-- Indices de la tabla `subestacion`
+--
+ALTER TABLE `subestacion`
+  ADD PRIMARY KEY (`IDSUBESTACION`);
+
+--
+-- Indices de la tabla `sublinea`
+--
+ALTER TABLE `sublinea`
+  ADD PRIMARY KEY (`IDSUBLINEA`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`IDUSUARIO`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `area`
+--
+ALTER TABLE `area`
+  MODIFY `IDAREA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `ciudad`
+--
+ALTER TABLE `ciudad`
+  MODIFY `IDCIUDAD` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `componente`
+--
+ALTER TABLE `componente`
+  MODIFY `IDCOMPONENTE` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  MODIFY `IDEMPRESA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `equipo`
+--
+ALTER TABLE `equipo`
+  MODIFY `IDEQUIPO` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+
+--
+-- AUTO_INCREMENT de la tabla `estacion`
+--
+ALTER TABLE `estacion`
+  MODIFY `IDESTACION` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `isla`
+--
+ALTER TABLE `isla`
+  MODIFY `IDISLA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `linea`
+--
+ALTER TABLE `linea`
+  MODIFY `IDLINEA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `marca`
+--
+ALTER TABLE `marca`
+  MODIFY `IDMARCA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `punto`
+--
+ALTER TABLE `punto`
+  MODIFY `IDPUNTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT de la tabla `referencia`
+--
+ALTER TABLE `referencia`
+  MODIFY `IDREFERENCIA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `IDROL` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `sede`
+--
+ALTER TABLE `sede`
+  MODIFY `IDSEDE` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `subestacion`
+--
+ALTER TABLE `subestacion`
+  MODIFY `IDSUBESTACION` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `sublinea`
+--
+ALTER TABLE `sublinea`
+  MODIFY `IDSUBLINEA` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `IDUSUARIO` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
